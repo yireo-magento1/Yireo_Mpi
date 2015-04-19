@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo Mpi for Magento 
+ *
+ * @package     Yireo_Mpi
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
+ * @license     Open Source License (OSL v3)
+ */
+-->
+<config>
+
+    <modules>
+        <Yireo_Mpi>
+            <version>0.0.1</version>
+        </Yireo_Mpi>
+    </modules>
+
+    <global>
+
+        <blocks>
+            <mpi>
+                <class>Yireo_Mpi_Block</class>
+            </mpi>
+        </blocks>
+
+        <helpers>
+            <mpi>
+                <class>Yireo_Mpi_Helper</class>
+            </mpi>
+        </helpers>
+
+        <models>
+            <mpi>
+                <class>Yireo_Mpi_Model</class>
+            </mpi>
+        </models>
+
+    </global>
+
+    <adminhtml>
+        <menu>
+            <system>
+                <children>
+                    <tools>
+                        <children>
+                            <mpi translate="title" module="mpi">
+                                <title>Performance Insights</title>
+                                <action>mpi/index/index</action>
+                            </mpi>
+                        </children>
+                    </tools>
+                </children>
+            </system>
+        </menu>
+
+        <translate>
+            <modules>
+                <Yireo_Mpi>
+                    <files>
+                        <default>Yireo_Mpi.csv</default>
+                    </files>
+                </Yireo_Mpi>
+            </modules>
+        </translate>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mpi translate="title" module="mpi">
+                                            <title>Mpi Section</title>
+                                        </mpi>
+                                    </children>
+                                </config>
+                                <tools>
+                                    <children>
+                                        <mpi translate="title" module="mpi">
+                                            <title>Mpi</title>
+                                        </mpi>
+                                    </children>
+                                </tools>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <!--<admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mpi after="Mage_Adminhtml">Yireo_Mpi</mpi>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>-->
+
+    <frontend>
+        <routers>
+            <mpi>
+                <use>standard</use>
+                <args>
+                    <module>Yireo_Mpi</module>
+                    <frontName>mpi</frontName>
+                </args>
+            </mpi>
+        </routers>
+
+        <translate>
+            <modules>
+                <Yireo_Mpi>
+                    <files>
+                        <default>Yireo_Mpi.csv</default>
+                    </files>
+                </Yireo_Mpi>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <mpi>
+            <settings>
+                <enabled>1</enabled>
+            </settings>
+        </mpi>
+    </default>
+
+</config>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo Mpi for Magento
+ *
+ * @package     Yireo_Mpi
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
+ * @license     Open Source License (OSL v3)
+ */
+-->
+<config>
+    <tabs>
+        <yireo translate="label" module="mpi">
+            <label>Yireo</label>
+            <sort_order>1000</sort_order>
+        </yireo>
+    </tabs>
+    <sections>
+        <mpi translate="label" module="mpi">
+            <label>Yireo MPI</label>
+            <tab>yireo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <secret translate="label">
+                            <label>API Secret</label>
+                            <comment><![CDATA[Yireo API-secret for MPI service]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </secret>
+                    </fields>
+                </settings>
+            </groups>
+        </mpi>
+    </sections>
+</config>
