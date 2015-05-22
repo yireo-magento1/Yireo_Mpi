@@ -23,7 +23,7 @@ class Yireo_Mpi_Model_Check_Security_Addhandler extends Yireo_Mpi_Model_Check_Ab
     public function getChecks()
     {
         return array(
-            $this->getAddHandlerCheck(),
+            $this->getMetricFromCallback('addhandler', 'getAddHandlerCheck'),
         );
     }
 
@@ -34,6 +34,7 @@ class Yireo_Mpi_Model_Check_Security_Addhandler extends Yireo_Mpi_Model_Check_Ab
      */
     public function getAddHandlerCheck()
     {
+        return false;
         // @todo: http://magento1.yireo-dev.com/test.php.csv
     }
 }

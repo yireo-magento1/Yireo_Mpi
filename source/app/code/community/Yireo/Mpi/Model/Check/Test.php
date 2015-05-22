@@ -21,7 +21,7 @@ class Yireo_Mpi_Model_Check_Test extends Yireo_Mpi_Model_Check_Abstract
     public function getChecks()
     {
         return array(
-            $this->getTestCheck(),
+            $this->getMetricFromCallback('test', 'getTestCheck'),
         );
     }
 
@@ -32,6 +32,6 @@ class Yireo_Mpi_Model_Check_Test extends Yireo_Mpi_Model_Check_Abstract
      */
     public function getTestCheck()
     {
-        return $this->getErrorData('Hello World');
+        return 1;
     }
 }

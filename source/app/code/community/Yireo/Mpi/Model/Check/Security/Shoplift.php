@@ -18,20 +18,20 @@ class Yireo_Mpi_Model_Check_Security_Shoplift extends Yireo_Mpi_Model_Check_Abst
     public function getChecks()
     {
         return array(
-            'cms_wysiwyg_post' => $this->checkCmsWysiwygPost(),
-            'patch_internally_forwarded' => $this->checkInternallyForwardedMethod(),
+            $this->getMetricFromCallback('cms_wysiwyg_post', 'checkCmsWysiwygPost'),
+            $this->getMetricFromCallback('patch_internally_forwarded', 'checkInternallyForwardedMethod'),
         );
     }
 
     public function checkCmsWysiwygPost()
     {
-        return array('bool', false);
+        return false;
         // @todo: POST /index.php/admin/Cms_Wysiwyg/directive/index/
     }
 
     public function checkInternallyForwardedMethod()
     {
-        $result = (int) method_exists('Mage_Admin_Model_Observer','setInternallyForwarded');
-        return array('bool', $result);
+        $result = method_exists('Mage_Admin_Model_Observer','setInternallyForwarded');
+        return $result;
     }
 }

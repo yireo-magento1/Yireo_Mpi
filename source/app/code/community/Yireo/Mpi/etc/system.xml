@@ -45,7 +45,7 @@
                         </enabled>
                         <secret translate="label">
                             <label>API Secret</label>
-                            <comment><![CDATA[Yireo API-secret for MPI service]]></comment>
+                            <comment><![CDATA[Yireo API-secret for MPI service. Minimum of 10 chars]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>

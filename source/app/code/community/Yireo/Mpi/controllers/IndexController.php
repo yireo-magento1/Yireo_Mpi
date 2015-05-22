@@ -27,18 +27,20 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
 
         $groups = $this->getRequest()->getParam('group');
         if (!empty($groups)) {
+            $groups = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $groups);
             $groups = explode(',', $groups);
         }
 
-        $metric = $this->getRequest()->getParam('metric');
-        if (!empty($metric)) {
-            $metric = preg_replace('/([^a-zA-Z0-9\-\_]+)/', '', $metric);
+        $metrics = $this->getRequest()->getParam('metric');
+        if (!empty($metrics)) {
+            $metrics = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $metrics);
+            $metrics = explode(',', $metrics);
         }
 
-        if (empty($metric)) {
-            $data = Mage::getModel('mpi/check')->getCheckData($metric);
+        if (!empty($metrics)) {
+            $data = Mage::getModel('mpi/check')->getDataFromModels($metrics);
         } else {
-            $data = Mage::getModel('mpi/check')->gatherCheckData($groups);
+            $data = Mage::getModel('mpi/check')->getDataFromGroups($groups);
         }
 
         $this->sendOutput($data);
@@ -122,5 +124,6 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($data));
         $this->getResponse()->sendResponse();
         $this->getRequest()->setDispatched(true);
+        exit;
     }
 }

@@ -15,12 +15,20 @@ class Yireo_Mpi_Model_Check
 {
     protected $checkModels = array(
         'basic' => array(
-            'test',
-            'security_addhandler',
-            'security_shoplift',
+            //'test',
+            //'environment_basics',
+            //'core_version',
+            //'core_compiler',
+            //'core_cache',
+            //'core_session',
+            'core_indexer',
         ),
         'database' => array(
             //'catalog',
+        ),
+        'security' => array(
+            //'security_addhandler',
+            //'security_shoplift',
         ),
     );
 
@@ -29,7 +37,19 @@ class Yireo_Mpi_Model_Check
         return $this->checkModels;
     }
 
-    public function getCheckData($checkModel)
+    public function getDataFromModels($checkModels)
+    {
+        $data = array();
+
+        foreach ($checkModels as $checkModel) {
+            $modelMetrics = $this->getDataFromModel($checkModel);
+            $data = array_merge($data, array($checkModel => $modelMetrics));
+        }
+
+        return $data;
+    }
+
+    public function getDataFromModel($checkModel)
     {
         $modelName = 'mpi/check_' . $checkModel;
         $model = Mage::getModel($modelName);
@@ -44,16 +64,24 @@ class Yireo_Mpi_Model_Check
             return array();
         }
 
-        $modelData = $model->getChecks();
+        $modelMetrics = $model->getChecks();
 
-        if (is_array($modelData) == false) {
+        if (is_array($modelMetrics) == false) {
             return array();
         }
 
-        return $modelData;
+        foreach($modelMetrics as $modelMetricIndex => $modelMetric) {
+            if (is_object($modelMetric)) {
+                $modelMetric = $modelMetric->export();
+            }
+
+            $modelMetrics[$modelMetricIndex] = $modelMetric;
+        }
+
+        return $modelMetrics;
     }
 
-    public function gatherCheckData($selectGroups = array())
+    public function getDataFromGroups($selectGroups = array())
     {
         $data = array();
 
@@ -63,10 +91,8 @@ class Yireo_Mpi_Model_Check
                 continue;
             }
 
-            foreach ($checkModelGroup as $checkModel) {
-                $modelData = $this->getCheckData($checkModel);
-                $data = array_merge($data, array($checkModel => $modelData));
-            }
+            $modelData = $this->getDataFromModels($checkModelGroup);
+            $data = array_merge($data, $modelData);
         }
 
         return $data;

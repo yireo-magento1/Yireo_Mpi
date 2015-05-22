@@ -23,7 +23,7 @@ class Yireo_Mpi_Model_Metric
     /**
      * Allowed metric types
      */
-    protected $allowedTypes = array('int', 'bool', 'string', 'text');
+    protected $allowedTypes = array('int', 'bool', 'string', 'text', 'seconds', 'bytes', 'double', 'timestamp');
 
     /**
      * Metric name
@@ -38,13 +38,6 @@ class Yireo_Mpi_Model_Metric
      * @var mixed
      */
     protected $value = null;
-
-    /**
-     * Group-code of this metric
-     *
-     * @var string
-     */
-    protected $group = null;
 
     /**
      * Message-level
@@ -77,12 +70,12 @@ class Yireo_Mpi_Model_Metric
     /**
      * Constructor
      */
-    public function __construct($name, $value, $type = 'string', $group = 'basic', $startTime = null, $endTime = null, $comment = null)
+    public function __construct($name = null, $value = null, $type = null, $level = null, $startTime = null, $endTime = null, $comment = null)
     {
         $this->setName($name);
         $this->setValue($value);
         $this->setType($type);
-        $this->setGroup($group);
+        $this->setLevel($level);
         $this->setStartTime($startTime);
         $this->setEndTime($endTime);
         $this->setComment($comment);
@@ -97,32 +90,15 @@ class Yireo_Mpi_Model_Metric
         $data['name'] = $this->getName();
         $data['value'] = $this->getValue();
         $data['type'] = $this->getType();
-        $data['group'] = $this->getGroup();
         $data['startTime'] = $this->getStartTime();
         $data['endTime'] = $this->getEndTime();
-        $data['comment'] = $this->getComment();
+
+        $comment = $this->getComment();
+        if (!empty($comment)) {
+            $data['comment'] = $comment;
+        }
 
         return $data;
-    }
-
-    /**
-     * Method to set the group
-     *
-     * @param mixed $group
-     */
-    public function setGroup($group)
-    {
-        $this->group = $group;
-    }
-
-    /**
-     * Method to get the group
-     *
-     * @return mixed
-     */
-    public function getGroup()
-    {
-        return $this->group;
     }
 
     /**
@@ -152,7 +128,7 @@ class Yireo_Mpi_Model_Metric
             return;
         }
 
-        if (is_array($type, $this->allowedTypes) == false) {
+        if (in_array($type, $this->allowedTypes) == false) {
             throw new Exception('Unknown metric type');
         }
 
@@ -164,7 +140,23 @@ class Yireo_Mpi_Model_Metric
      */
     public function getType()
     {
-        return $this->type;
+        if (!empty($this->type)) {
+            return $this->type;
+        }
+
+        if (is_numeric($this->value)) {
+            return 'int';
+        }
+
+        if (is_bool($this->value)) {
+            return 'bool';
+        }
+
+        if (is_string($this->value)) {
+            return 'string';
+        }
+
+        return 'unknown';
     }
 
     /**
