@@ -1,0 +1,4 @@
+# Modman file
+source/app/code/community/Yireo/Mpi/                        app/code/community/Yireo/Mpi
+source/app/etc/modules/Yireo_Mpi.xml                        app/etc/modules/Yireo_Mpi.xml
+source/yireo_mpi.php                                        yireo_mpi.php
