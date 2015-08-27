@@ -97,13 +97,10 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
         }
 
         if ($format == 'json') {
-            $this->sendOutputAsJson($data);
+            return $this->sendOutputAsJson($data);
         } elseif ($format == 'dump') {
-            $this->sendOutputAsDump($data);
+            return $this->sendOutputAsDump($data);
         }
-
-        $this->getResponse()->sendResponse();
-        $this->getRequest()->setDispatched(true);
     }
 
     /**
@@ -114,6 +111,7 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
     protected function sendOutputAsDump($data)
     {
         $this->getResponse()->setHeader('Content-type', 'text/html', true);
+        ini_set('xdebug.var_display_max_children', 1024);
         Zend_Debug::dump($data);
     }
 
