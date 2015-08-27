@@ -21,13 +21,18 @@ class Yireo_Mpi_Model_Resource_Database_Status extends Yireo_Mpi_Model_Resource_
     public function getData()
     {
         $db = $this->getDbConnection();
-
         $variables = $this->getVariables();
-        foreach($variables as $variable => $variableType) {
-            $query = 'SHOW STATUS LIKE "'.$variable.'"';
-            $result = $db->fetchRow($query);
-            $result = array_pop($result);
-            $this->addMetric($variable, $result, $variableType);
+
+        $query = 'SHOW STATUS';
+        $rows = $db->fetchAll($query);
+        foreach ($rows as $row) {
+            $rowName = strtolower(array_shift($row));
+            $rowValue = array_shift($row);
+    
+            if (array_key_exists($rowName, $variables)) {
+                $variableType = $variables[$rowName];
+                $this->addMetric($rowName, $rowValue, $variableType);
+            }
         }
 
         return $this->metrics;

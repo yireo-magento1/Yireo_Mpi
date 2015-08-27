@@ -21,15 +21,17 @@ class Yireo_Mpi_Model_Resource_Database_Variable extends Yireo_Mpi_Model_Resourc
     public function getData()
     {
         $db = $this->getDbConnection();
-
         $variables = $this->getVariables();
-        foreach($variables as $variable => $variableType) {
-            $query = 'SHOW VARIABLES LIKE "'.$variable.'"';
-            $result = $db->fetchRow($query);
 
-            if (!empty($result)) {
-                $result = array_pop($result);
-                $this->addMetric($variable, $result, $variableType);
+        $query = 'SHOW VARIABLES';
+        $rows = $db->fetchAll($query);
+        foreach ($rows as $row) {
+            $rowName = strtolower(array_shift($row));
+            $rowValue = array_shift($row);
+    
+            if (array_key_exists($rowName, $variables)) {
+                $variableType = $variables[$rowName];
+                $this->addMetric($rowName, $rowValue, $variableType);
             }
         }
 
@@ -73,6 +75,7 @@ class Yireo_Mpi_Model_Resource_Database_Variable extends Yireo_Mpi_Model_Resourc
             'slow_query_log' => 'bool',
             'slow_query_log_file' => 'string',
             'max_connections' => 'int',
+            'connect_timeout' => 'seconds',
             'performance_schema' => 'bool',
         );
     }
