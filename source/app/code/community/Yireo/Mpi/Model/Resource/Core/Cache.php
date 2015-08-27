@@ -22,6 +22,7 @@ class Yireo_Mpi_Model_Resource_Core_Cache extends Yireo_Mpi_Model_Resource_Abstr
     {
         $cacheTypes = $this->getCacheTypes();
         foreach($cacheTypes as $cacheName => $cacheType) {
+            $this->addMetric('type/'.$cacheName.'/type', $cacheType->getData('cache_type'));
             $this->addMetric('type/'.$cacheName.'/status', (bool)$cacheType->getData('status'));
             $this->addMetric('type/'.$cacheName.'/tags', $cacheType->getData('tags'));
         }
