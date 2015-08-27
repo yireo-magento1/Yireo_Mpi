@@ -37,17 +37,8 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
     {
         $this->authenticate();
 
-        $groups = $this->getRequest()->getParam('group');
-        if (!empty($groups)) {
-            $groups = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $groups);
-            $groups = explode(',', $groups);
-        }
-
-        $metrics = $this->getRequest()->getParam('metric');
-        if (!empty($metrics)) {
-            $metrics = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $metrics);
-            $metrics = explode(',', $metrics);
-        }
+        $groups = Mage::helper('mpi')->getGroupsFromRequest();
+        $metrics = Mage::helper('mpi')->getMetricsFromRequest();
 
         if (!empty($metrics)) {
             $data = $this->getResourceModel()->getDataFromModels($metrics);

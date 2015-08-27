@@ -22,7 +22,7 @@ class Yireo_Mpi_Model_Resource
         'test' => array(
             'test',
         ),
-        'manual' => array(
+        'all' => array(
             'core_attribute',
             'core_cache',
             'core_catalog',

@@ -65,4 +65,30 @@ class Yireo_Mpi_Helper_Data extends Mage_Core_Helper_Abstract
         $logger = Mage::getModel('core/log_adapter', 'mpi.log');
         $logger->log($string);
     }
+
+    public function getMetricsFromRequest()
+    {
+        $metrics = Mage::app()->getRequest()->getParam('metric');
+        if (!empty($metrics)) {
+            $metrics = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $metrics);
+            $metrics = explode(',', $metrics);
+        } else {
+            $metrics = array();
+        }
+     
+        return $metrics;
+    }
+
+    public function getGroupsFromRequest()
+    {
+        $groups = Mage::app()->getRequest()->getParam('group');
+        if (!empty($groups)) {
+            $groups = preg_replace('/([^a-zA-Z0-9\-\_\,]+)/', '', $groups);
+            $groups = explode(',', $groups);
+        } else {
+            $groups = array();
+        }
+     
+        return $groups;
+    }
 }
