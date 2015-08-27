@@ -11,14 +11,14 @@
 /**
  * Get environment basics
  */
-class Yireo_Mpi_Model_Check_Environment_Basics extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
         return array(
             $this->getMetricFromCallback('ip', 'getIpAddress'),
@@ -27,9 +27,9 @@ class Yireo_Mpi_Model_Check_Environment_Basics extends Yireo_Mpi_Model_Check_Abs
             $this->getMetricFromCallback('gzip', 'getGzip'),
             $this->getMetricFromCallback('deflate', 'getDeflate'),
             $this->getMetricFromCallback('dns_time', 'getDnsTime', 'seconds'),
+            $this->getMetric('timezone:php', date_default_timezone_get()),
+            $this->getMetric('timezone:ini', ini_get('date.timezone')),
         );
-
-        // @todo: Add servers timezone
     }
 
     public function getIpAddress()

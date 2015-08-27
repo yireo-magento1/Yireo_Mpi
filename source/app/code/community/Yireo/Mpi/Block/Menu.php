@@ -10,7 +10,7 @@
 
 class Yireo_Mpi_Block_Menu extends Mage_Core_Block_Template
 {
-    /*
+    /**
      * Constructor method
      */
     public function _construct()
@@ -20,7 +20,7 @@ class Yireo_Mpi_Block_Menu extends Mage_Core_Block_Template
         $this->setTemplate('mpi/menu.phtml');
     }
 
-    /*
+    /**
      * Helper method to get a list of the menu-items
      */
     public function getMenuItems()

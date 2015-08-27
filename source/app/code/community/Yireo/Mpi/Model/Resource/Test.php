@@ -11,17 +11,17 @@
 /**
  * Test check
  */
-class Yireo_Mpi_Model_Check_Test extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Test extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
         return array(
-            $this->getMetricFromCallback('test', 'getTestCheck'),
+            $this->getMetricFromCallback('test', 'getTest'),
         );
     }
 
@@ -30,7 +30,7 @@ class Yireo_Mpi_Model_Check_Test extends Yireo_Mpi_Model_Check_Abstract
      *
      * @return array
      */
-    public function getTestCheck()
+    public function getTest()
     {
         return 1;
     }

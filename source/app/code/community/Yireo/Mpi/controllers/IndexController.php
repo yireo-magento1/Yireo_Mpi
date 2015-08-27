@@ -8,10 +8,8 @@
  * @license     Open Source License (OSL v3)
  */
 
-//print_r(Mage::app()->getRequest());
-
 /**
- * Mpi admin controller
+ * MPI frontend controller
  *
  * @category   Mpi
  * @package     Yireo_Mpi
@@ -19,7 +17,21 @@
 class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * Show some details
+     * Action to display a listing of resource models
+     */
+    public function indexAction()
+    {
+        if ($this->getHelper()->authenticate()) {
+            return true;
+        }
+
+        $resourceModels = $this->getResourceModel()->getResourceModels();
+
+        $this->sendOutput($resourceModels);
+    }
+
+    /**
+     * Action to display of listing of collected resource metrics
      */
     public function collectAction()
     {
@@ -38,25 +50,36 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
         }
 
         if (!empty($metrics)) {
-            $data = Mage::getModel('mpi/check')->getDataFromModels($metrics);
+            $data = $this->getResourceModel()->getDataFromModels($metrics);
         } else {
-            $data = Mage::getModel('mpi/check')->getDataFromGroups($groups);
+            $data = $this->getResourceModel()->getDataFromGroups($groups);
         }
 
         $this->sendOutput($data);
     }
 
-    public function noRouteAction()
+    /**
+     * Action to display a PHP info page
+     */
+    public function phpinfoAction()
     {
-        $data = array('error' => 'Action not found');
-        $this->sendOutput($data);
+        if ($this->getHelper()->authenticate()) {
+            return true;
+        }
+
+        echo phpinfo();
+        exit;
     }
 
-    public function indexAction()
+    /**
+     * Action to handle unroutable actions
+     *
+     * @param null $coreRoute
+     */
+    public function norouteAction($coreRoute = null)
     {
-        $checkModels = Mage::getModel('mpi/check')->getCheckModels();
-
-        $this->sendOutput($checkModels);
+        $data = array('error' => 'Route "'.$coreRoute.'" not found');
+        $this->sendOutput($data);
     }
 
     /**
@@ -90,7 +113,7 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
      */
     protected function sendOutputAsDump($data)
     {
-        $this->getResponse()->setHeader('Content-type','text/html',true);
+        $this->getResponse()->setHeader('Content-type', 'text/html', true);
         Zend_Debug::dump($data);
     }
 
@@ -101,7 +124,7 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
      */
     protected function sendOutputAsJson($data)
     {
-        $this->getResponse()->setHeader('Content-type','application/json',true);
+        $this->getResponse()->setHeader('Content-type', 'application/json', true);
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($data));
     }
 
@@ -112,18 +135,34 @@ class Yireo_Mpi_IndexController extends Mage_Core_Controller_Front_Action
      */
     protected function authenticate()
     {
-        if(Mage::helper('mpi')->authenticate()) {
+        if ($this->getHelper()->authenticate()) {
             return true;
         }
 
         $data = array('error' => 'Access denied');
 
         $this->getResponse()->clearHeaders();
-        $this->getResponse()->setHeader('HTTP/1.0','403 Forbidden',true);
-        $this->getResponse()->setHeader('Content-type','application/json',true);
+        $this->getResponse()->setHeader('HTTP/1.0', '403 Forbidden', true);
+        $this->getResponse()->setHeader('Content-type', 'application/json', true);
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($data));
         $this->getResponse()->sendResponse();
         $this->getRequest()->setDispatched(true);
         exit;
+    }
+
+    /**
+     * @return Yireo_Mpi_Helper_Data
+     */
+    protected function getHelper()
+    {
+        return Mage::helper('mpi');
+    }
+
+    /**
+     * @return Yireo_Mpi_Model_Resource
+     */
+    protected function getResourceModel()
+    {
+        return Mage::getModel('mpi/resource');
     }
 }

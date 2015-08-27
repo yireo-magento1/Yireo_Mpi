@@ -13,9 +13,9 @@
  *
  * @info        SUPEE-5344
  */
-class Yireo_Mpi_Model_Check_Security_Shoplift extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Security_Shoplift extends Yireo_Mpi_Model_Resource_Abstract
 {
-    public function getChecks()
+    public function getData()
     {
         return array(
             $this->getMetricFromCallback('cms_wysiwyg_post', 'checkCmsWysiwygPost'),
@@ -26,7 +26,6 @@ class Yireo_Mpi_Model_Check_Security_Shoplift extends Yireo_Mpi_Model_Check_Abst
     public function checkCmsWysiwygPost()
     {
         return false;
-        // @todo: POST /index.php/admin/Cms_Wysiwyg/directive/index/
     }
 
     public function checkInternallyForwardedMethod()

@@ -9,7 +9,7 @@
  */
 
 /**
- * Mpi admin controller
+ * MPI backend controller
  *
  * @category   Mpi
  * @package     Yireo_Mpi
@@ -38,5 +38,12 @@ class Yireo_Mpi_MpiController extends Mage_Adminhtml_Controller_Action
         $this->_initAction()
             ->_addContent($this->getLayout()->createBlock('mpi/overview'))
             ->renderLayout();
+    }
+
+    protected function _isAllowed()
+    {
+        $aclResource = 'admin/system/tools/mpi';
+
+        return Mage::getSingleton('admin/session')->isAllowed($aclResource);
     }
 }

@@ -11,14 +11,14 @@
 /**
  * Get core versioning
  */
-class Yireo_Mpi_Model_Check_Core_Version extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Core_Version extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
         return array(
             $this->getMetric('version', $this->getVersion()),

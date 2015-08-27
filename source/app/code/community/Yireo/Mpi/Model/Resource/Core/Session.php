@@ -11,20 +11,20 @@
 /**
  * Get caching information
  */
-class Yireo_Mpi_Model_Check_Core_Session extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Core_Session extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
-        $checks = array();
+        $result = array();
 
-        $checks[] = $this->getMetric('session_save', $this->getSessionSave());
+        $result[] = $this->getMetric('session_save', $this->getSessionSave());
 
-        return $checks;
+        return $result;
     }
 
     public function getSessionSave()

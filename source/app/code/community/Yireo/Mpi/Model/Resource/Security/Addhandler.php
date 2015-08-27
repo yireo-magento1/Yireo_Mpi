@@ -13,14 +13,14 @@
  *
  * @info        http://devdocs.magento.com/guides/m1x/other/appsec-900_addhandler.html
  */
-class Yireo_Mpi_Model_Check_Security_Addhandler extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Security_Addhandler extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
         return array(
             $this->getMetricFromCallback('addhandler', 'getAddHandlerCheck'),
@@ -35,6 +35,5 @@ class Yireo_Mpi_Model_Check_Security_Addhandler extends Yireo_Mpi_Model_Check_Ab
     public function getAddHandlerCheck()
     {
         return false;
-        // @todo: http://magento1.yireo-dev.com/test.php.csv
     }
 }

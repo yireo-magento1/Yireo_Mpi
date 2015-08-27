@@ -11,31 +11,29 @@
 /**
  * Get caching information
  */
-class Yireo_Mpi_Model_Check_Core_Cache extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Core_Cache extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all caches of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
-        $checks = array();
-
         $cacheTypes = $this->getCacheTypes();
         foreach($cacheTypes as $cacheName => $cacheType) {
-            $checks[] = $this->getMetric('type/'.$cacheName.'/status', (bool)$cacheType->getData('status'));
-            $checks[] = $this->getMetric('type/'.$cacheName.'/tags', $cacheType->getData('tags'));
+            $this->addMetric('type/'.$cacheName.'/status', (bool)$cacheType->getData('status'));
+            $this->addMetric('type/'.$cacheName.'/tags', $cacheType->getData('tags'));
         }
 
-        $checks[] = $this->getMetric('caching_backend', $this->getCachingBackend());
+        $this->addMetric('caching_backend', $this->getCachingBackend());
 
-        return $checks;
+        return $this->metrics;
     }
 
     public function getCacheTypes()
     {
-        $cacheTypes = Mage::getModel('core/cache')->getTypes();
+        $cacheTypes = Mage::app()->getCacheInstance()->getTypes();
         return $cacheTypes;
     }
 

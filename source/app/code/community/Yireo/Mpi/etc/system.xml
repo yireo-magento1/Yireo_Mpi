@@ -18,7 +18,7 @@
     </tabs>
     <sections>
         <mpi translate="label" module="mpi">
-            <label>Yireo MPI</label>
+            <label>Magento Performance Insights</label>
             <tab>yireo</tab>
             <frontend_type>text</frontend_type>
             <sort_order>1</sort_order>

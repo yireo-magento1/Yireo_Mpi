@@ -11,14 +11,14 @@
 /**
  * Get information on the Magento Compiler
  */
-class Yireo_Mpi_Model_Check_Core_Compiler extends Yireo_Mpi_Model_Check_Abstract
+class Yireo_Mpi_Model_Resource_Core_Compiler extends Yireo_Mpi_Model_Resource_Abstract
 {
     /**
-     * Return all checks of this class
+     * Return all data of this class
      *
      * @return array
      */
-    public function getChecks()
+    public function getData()
     {
         return array(
             $this->getMetricFromCallback('enabled', 'isEnabled'),

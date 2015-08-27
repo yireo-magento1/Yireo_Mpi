@@ -13,16 +13,29 @@
  */
 class Yireo_Mpi_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    /**
+     * @return bool|mixed
+     */
     public function enabled()
     {
+        if ((bool)Mage::getStoreConfig('advanced/modules_disable_output/Yireo_Mpi')) {
+            return false;
+        }
+
         return Mage::getStoreConfig('mpi/settings/enabled');
     }
 
+    /**
+     * @return mixed
+     */
     public function getSecret()
     {
         return Mage::getStoreConfig('mpi/settings/secret');
     }
 
+    /**
+     * @return bool
+     */
     public function authenticate()
     {
         $secret = Mage::app()->getRequest()->getParam('secret');
@@ -41,5 +54,15 @@ class Yireo_Mpi_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return false;
+    }
+
+    public function log($string, $variable1 = null, $variable2 = null)
+    {
+        $string = $this->__($string, $variable1, $variable2);
+
+        // @todo: Add option for debugging
+
+        $logger = Mage::getModel('core/log_adapter', 'mpi.log');
+        $logger->log($string);
     }
 }

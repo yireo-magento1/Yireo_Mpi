@@ -13,7 +13,7 @@
 
     <modules>
         <Yireo_Mpi>
-            <version>0.0.1</version>
+            <version>0.1.4</version>
         </Yireo_Mpi>
     </modules>
 
@@ -47,7 +47,7 @@
                         <children>
                             <mpi translate="title" module="mpi">
                                 <title>Performance Insights</title>
-                                <action>mpi/index/index</action>
+                                <action>adminhtml/mpi/index</action>
                             </mpi>
                         </children>
                     </tools>
@@ -93,7 +93,7 @@
         </acl>
     </adminhtml>
 
-    <!--<admin>
+    <admin>
         <routers>
             <adminhtml>
                 <args>
@@ -103,7 +103,7 @@
                 </args>
             </adminhtml>
         </routers>
-    </admin>-->
+    </admin>
 
     <frontend>
         <routers>
