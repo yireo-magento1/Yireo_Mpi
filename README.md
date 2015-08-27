@@ -1,15 +1,17 @@
 # Yireo MPI (Magento Performance Insights)
 
 This repository contains the sources for a Magento 1 extension, that
-adds an API to Magento - currently used for the Magento Performance
+adds an API to Magento, used by the Magento Performance
 Insights (MPI) service developed by Yireo. 
+https://www.yireo.com/services/magento-services/magento-performance-insights
 
+## About the Magento Performance Insights service
 The Yireo MPI service allows you to quickly gather numerous metrics 
 from your Magento shop and its hosting environment. 
 With an active MPI subscription, these data are then collected and
-stored in the Yireo cloud. Next, the data are interpreted and presented
+stored on a private Yireo server. Next, the data are interpreted and presented
 to you visually on the Yireo site. In the end, you get an overview of
-performance settings, specific to your environment, and custom advice on
+performance settings, specific to your environment, and custom personal advice on
 how to optimize things to the max.
 
 ## Authentication
