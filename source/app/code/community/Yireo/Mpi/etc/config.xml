@@ -13,7 +13,7 @@
 
     <modules>
         <Yireo_Mpi>
-            <version>0.1.4</version>
+            <version>0.2.0</version>
         </Yireo_Mpi>
     </modules>
 
@@ -46,7 +46,7 @@
                     <tools>
                         <children>
                             <mpi translate="title" module="mpi">
-                                <title>Performance Insights</title>
+                                <title>Yireo MPI</title>
                                 <action>adminhtml/mpi/index</action>
                             </mpi>
                         </children>

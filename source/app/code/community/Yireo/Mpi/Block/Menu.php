@@ -29,7 +29,7 @@ class Yireo_Mpi_Block_Menu extends Mage_Core_Block_Template
         $items = array(
             array(
                 'action' => 'index',
-                'title' => 'Overview',
+                'title' => 'System Check',
             ),
         );
 
@@ -44,7 +44,7 @@ class Yireo_Mpi_Block_Menu extends Mage_Core_Block_Template
                 $item['class'] = 'inactive';
             }
 
-            $item['url'] = $url->getUrl('mpi/index/'.$item['action']);
+            $item['url'] = $url->getUrl('adminhtml/mpi/'.$item['action']);
 
             $items[$index] = $item;
         }

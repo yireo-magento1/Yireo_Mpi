@@ -1,0 +1,59 @@
+<?php
+/**
+ * MPI extension for Magento
+ *
+ * @package     Yireo_Mpi
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2015 Yireo (http://www.yireo.com/)
+ * @license     Open Source License
+ */
+
+$checks = $this->getChecks();
+?>
+
+<div class="columns ">
+
+    <div class="side-col" id="page:left">
+        <?= $this->getMenu(); ?>
+    </div>
+
+    <div class="main-col" id="content">
+        <div class="main-col-inner">
+
+            <div class="content-header">
+                <table cellspacing="0">
+                    <tr>
+                        <td><h3 class="icon-head head-tag"><?= $this->getHeader('System Check'); ?></h3></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend"><?= $this->__('System Check'); ?></h4>
+                </div>
+                <div class="fieldset ">
+                    <table cellspacing="5" class="form-list">
+                        <tbody>
+                        <?php if(!empty($checks)) : ?>
+                            <?php foreach ($checks as $check) : ?>
+                                <tr>
+                                    <td width="200">
+                                        <strong><?= $check->label; ?></strong>
+                                    </td>
+                                    <td width="50">
+                                        <?= $check->result_image; ?>
+                                    </td>
+                                    <td>
+                                        <?= $check->result_text; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
