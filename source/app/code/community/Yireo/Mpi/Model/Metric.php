@@ -90,8 +90,8 @@ class Yireo_Mpi_Model_Metric
         $data['name'] = $this->getName();
         $data['value'] = $this->getValue();
         $data['type'] = $this->getType();
-        $data['startTime'] = $this->getStartTime();
-        $data['endTime'] = $this->getEndTime();
+        $data['start_time'] = $this->getStartTime();
+        $data['end_time'] = $this->getEndTime();
 
         $comment = $this->getComment();
         if (!empty($comment)) {

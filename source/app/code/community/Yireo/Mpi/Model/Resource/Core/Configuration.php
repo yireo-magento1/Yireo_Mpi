@@ -41,6 +41,7 @@ class Yireo_Mpi_Model_Resource_Core_Configuration extends Yireo_Mpi_Model_Resour
         return array(
             'global/disable_local_modules' => 'bool',
             'global/skip_process_modules_updates' => 'bool',
+            'admin/routers/adminhtml/args/frontName' => 'string',
         );
     }
 

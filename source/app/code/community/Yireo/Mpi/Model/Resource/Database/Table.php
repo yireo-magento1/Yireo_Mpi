@@ -24,12 +24,8 @@ class Yireo_Mpi_Model_Resource_Database_Table extends Yireo_Mpi_Model_Resource_D
 
         $tables = $this->getTableNames();
         foreach($tables as $table) {
-            $result[] = $this->getMetric($table . ':count', $this->getTableSize($table));
+            $result[] = $this->getMetric($table . '/count', $this->getTableSize($table));
         }
-
-        $db = $this->getDbConnection();
-        $query = 'SHOW TABLE STATUS';
-        $result = $db->fetchAll($query);
 
         return $result;
     }

@@ -110,34 +110,6 @@ class Yireo_Mpi_Model_Resource_Abstract
     }
 
     /**
-     * @return bool
-     * @throws Exception
-     */
-    public function initMagento()
-    {
-        // When Mage is found, assume Magento is already initialized
-        if (class_exists('Mage')) {
-            return true;
-        }
-
-        if (is_file('app/Mage.php') == false) {
-            throw new Exception('Magento file not found');
-        }
-
-        $startTime = microtime(true);
-
-        require_once 'app/Mage.php';
-        Mage::app();
-        Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
-
-        $metric = $this->metric('magento::startup', round(microtime(true) - $startTime, 4));
-        $metric->setGroup('group');
-        $metric->setType('seconds');
-
-        return $metric;
-    }
-
-    /**
      * @param $name
      * @param null $filters
      *

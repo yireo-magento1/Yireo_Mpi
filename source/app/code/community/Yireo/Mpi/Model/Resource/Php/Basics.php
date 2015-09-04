@@ -30,7 +30,7 @@ class Yireo_Mpi_Model_Resource_Php_Basics extends Yireo_Mpi_Model_Resource_Abstr
         $result[] = $this->getMetric('os_additional', $this->getOsAdditional());
         $result[] = $this->getMetric('zend_version', $this->getZendVersion());
         $result[] = $this->getMetric('resource_usage', $this->getResourceUsage(), 'array');
-        $result[] = $this->getMetric('memory_usage', $this->getMemoryUsage());
+        $result[] = $this->getMetric('memory_usage', $this->getMemoryUsage(), 'bytes');
         $result[] = $this->getMetric('load_average', $this->getLoadAverage(), 'array');
 
         return $result;

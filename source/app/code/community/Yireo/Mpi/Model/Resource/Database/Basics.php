@@ -27,8 +27,13 @@ class Yireo_Mpi_Model_Resource_Database_Basics extends Yireo_Mpi_Model_Resource_
         $result[] = $this->getMetric('database', $this->getDatabaseName());
         $result[] = $this->getMetric('database_count', $this->countDatabases());
         $result[] = $this->getMetric('table_count', $this->countTables());
-        $result[] = $this->getMetric('table_status', $this->getTableStatus(), 'array');
         $result[] = $this->getMetric('status', $this->getStatus(), 'array');
+
+        $tableStatuses = $this->getTableStatus();
+        foreach($tableStatuses as $tableStatus) {
+            $tableName = array_shift($tableStatus);
+            $result[] = $this->getMetric('table_status/'.$tableName, $tableStatus, 'array');
+        }
 
         return $result;
     }
