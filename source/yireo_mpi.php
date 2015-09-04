@@ -50,8 +50,8 @@ class YireoMpi
             'name' => 'yireo_mpi/init/startup',
             'value' => round($endTime - $startTime, 4),
             'type' => 'seconds',
-            'startTime' => $startTime,
-            'endTime' => $endTime,
+            'start_time' => $startTime,
+            'end_time' => $endTime,
         );
     }
 
