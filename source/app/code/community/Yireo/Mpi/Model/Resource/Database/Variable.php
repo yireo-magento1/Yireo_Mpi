@@ -69,7 +69,7 @@ class Yireo_Mpi_Model_Resource_Database_Variable extends Yireo_Mpi_Model_Resourc
             'innodb_flush_log_at_trx_commit' => 'int',
             'innodb_flush_method' => 'string',
             'innodb_log_file_size' => 'bytes',
-            'innodb_lock_wait_timeout' => 'int',
+            'innodb_lock_wait_timeout' => 'seconds',
             'long_query_time' => 'seconds',
             'log_slow_queries' => 'string',
             'slow_query_log' => 'bool',
