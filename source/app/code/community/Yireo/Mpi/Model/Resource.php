@@ -56,8 +56,10 @@ class Yireo_Mpi_Model_Resource
             'database_variable',
         ),
         'poll_short' => array(
+            'database_status',
         ),
         'poll_long' => array(
+            'database_status',
         ),
     );
 
@@ -66,8 +68,25 @@ class Yireo_Mpi_Model_Resource
      */
     public function getResourceModels()
     {
-        // @todo: Add an event to allow for third party extensions to extend this array
-        return $this->resourceModels;
+        $resourceModelGroups = $this->resourceModels;
+
+        foreach ($resourceModelGroups as $resourceModelGroupName => $resourceModelGroup) {
+            foreach($resourceModelGroup as $resourceModel) {
+                if (preg_match('/^([a-z]+)_/', $resourceModel, $match)) {
+                    $newGroup = $match[1];
+                    if (!isset($resourceModelGroups[$newGroup])) {
+                        $resourceModelGroups[$newGroup] = array();
+                    }
+
+                    $resourceModelGroups[$newGroup][] = $resourceModel;
+                }
+            }
+        }
+
+        // Add an event to allow for third party extensions to extend this array
+        Mage::dispatchEvent('mpi_list_resource_models', array('resourceModels' => $resourceModelGroups));
+
+        return $resourceModelGroups;
     }
 
     /**
@@ -134,7 +153,7 @@ class Yireo_Mpi_Model_Resource
     {
         $data = array();
 
-        foreach ($this->resourceModels as $resourceModelGroupName => $resourceModelGroup) {
+        foreach ($this->getResourceModels() as $resourceModelGroupName => $resourceModelGroup) {
 
             if(!empty($selectGroups) && in_array($resourceModelGroupName, $selectGroups) == false) {
                 continue;
