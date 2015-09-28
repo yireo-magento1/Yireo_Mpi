@@ -62,6 +62,7 @@ class Yireo_Mpi_Model_Resource_Core_Configuration extends Yireo_Mpi_Model_Resour
             'dev/log/active' => 'bool',
             'dev/js/merge_files' => 'bool',
             'dev/css/merge_css_files' => 'bool',
+            'general/locale/timezone' => 'string',
         );
     }
 }

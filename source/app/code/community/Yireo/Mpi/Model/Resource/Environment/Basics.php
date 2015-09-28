@@ -27,6 +27,9 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
             $this->getMetricFromCallback('gzip', 'getGzip'),
             $this->getMetricFromCallback('deflate', 'getDeflate'),
             $this->getMetricFromCallback('dns_time', 'getDnsTime', 'seconds'),
+            $this->getMetricFromCallback('openssl_digest_methods', 'getOpensslDigestMethods', 'array'),
+            $this->getMetricFromCallback('openssl_cipher_methods', 'getOpensslCipherMethods', 'array'),
+            $this->getMetricFromCallback('openssl_version', 'getOpensslVersion'),
             $this->getMetric('timezone:php', date_default_timezone_get()),
             $this->getMetric('timezone:ini', ini_get('date.timezone')),
         );
@@ -70,4 +73,32 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
 
         return (float) round($dnsTimer / 4, 4);
     }
+
+	public function getOpensslDigestMethods()
+	{
+		if (function_exists('openssl_get_md_methods') == false)
+		{
+			return false;
+		}
+
+		return openssl_get_md_methods();
+	}
+
+	public function getOpensslCipherMethods()
+	{
+		if (function_exists('openssl_get_cipher_methods') == false)
+		{
+			return false;
+		}
+
+		return openssl_get_cipher_methods();
+	}
+
+	public function getOpensslVersion()
+	{
+		if (defined('OPENSSL_VERSION_TEXT'))
+		{
+			return OPENSSL_VERSION_TEXT;
+		}
+	}
 }

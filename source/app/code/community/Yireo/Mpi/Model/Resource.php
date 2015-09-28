@@ -47,6 +47,7 @@ class Yireo_Mpi_Model_Resource
             'security_admin',
             'security_get',
             'security_shoplift',
+            'security_phpinfo',
             'security_xmlrpc',
             'webserver_advanced',
             'webserver_basics',

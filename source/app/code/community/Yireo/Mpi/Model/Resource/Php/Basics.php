@@ -32,6 +32,7 @@ class Yireo_Mpi_Model_Resource_Php_Basics extends Yireo_Mpi_Model_Resource_Abstr
         $result[] = $this->getMetric('resource_usage', $this->getResourceUsage(), 'array');
         $result[] = $this->getMetric('memory_usage', $this->getMemoryUsage(), 'bytes');
         $result[] = $this->getMetric('load_average', $this->getLoadAverage(), 'array');
+        $result[] = $this->getMetric('date_default_timezone_get', date_default_timezone_get());
 
         return $result;
     }

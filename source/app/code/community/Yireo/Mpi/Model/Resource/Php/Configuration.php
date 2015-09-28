@@ -82,6 +82,7 @@ class Yireo_Mpi_Model_Resource_Php_Configuration extends Yireo_Mpi_Model_Resourc
             'eaccelerator.check_mtime' => 'bool',
             'eaccelerator.shm_size' => 'bytes',
             'soap.wsdl_cache_enabled' => 'bool',
+            'date.timezone' => 'string',
         );
     }
 }
