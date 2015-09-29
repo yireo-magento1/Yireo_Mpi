@@ -72,9 +72,21 @@ class YireoMpi
 
         $data['init'] = $this->metrics;
 
-        header('Content-Type: application/json', true);
-        echo Mage::helper('core')->jsonEncode($data);
-        exit;
+        $format = Mage::app()->getRequest()->getParam('format');
+        if (empty($format)) {
+            $format = 'json';
+        }
+
+        if ($format == 'json') {
+            header('Content-Type: application/json', true);
+            echo Mage::helper('core')->jsonEncode($data);
+            exit;
+
+        } elseif ($format == 'dump') {
+            Mage::app()->getResponse()->setHeader('Content-type', 'text/html', true);
+            ini_set('xdebug.var_display_max_children', 1024);
+            Zend_Debug::dump($data);
+        }
     }
 
     protected function getResponse()
