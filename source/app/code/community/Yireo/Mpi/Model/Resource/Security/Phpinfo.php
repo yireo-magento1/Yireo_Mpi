@@ -26,7 +26,7 @@ class Yireo_Mpi_Model_Resource_Security_Phpinfo extends Yireo_Mpi_Model_Resource
         $phpFiles = glob(BP.'/*.php');
 
         foreach($phpFiles as $phpFile) {
-            $phpContents = file_get_contents(BP.'/'.$phpFile);
+            $phpContents = file_get_contents($phpFile);
             if (strstr($phpContents, 'phpinfo()')) {
                 $phpInfoFiles[] = $phpFile;
             }
