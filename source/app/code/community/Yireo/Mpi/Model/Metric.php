@@ -23,7 +23,7 @@ class Yireo_Mpi_Model_Metric
     /**
      * Allowed metric types
      */
-    protected $allowedTypes = array('int', 'bool', 'string', 'text', 'seconds', 'bytes', 'double', 'timestamp', 'array');
+    protected $allowedTypes = array('int', 'bool', 'string', 'text', 'seconds', 'bytes', 'kilobytes', 'megabytes', 'double', 'timestamp', 'array');
 
     /**
      * Metric name
