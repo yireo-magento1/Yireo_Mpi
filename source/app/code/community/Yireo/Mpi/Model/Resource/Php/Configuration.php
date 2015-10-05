@@ -66,7 +66,7 @@ class Yireo_Mpi_Model_Resource_Php_Configuration extends Yireo_Mpi_Model_Resourc
             'apc.shm_size' => 'bytes',
             'apc.stat' => 'bool',
             'opcache.enable' => 'bool',
-            'opcache.memory_consumption' => 'bytes',
+            'opcache.memory_consumption' => 'megabytes',
             'opcache.revalidate_freq' => 'seconds',
             'opcache.validate_timestamps' => 'bool',
             'memcache.allow_failover' => 'bool',
