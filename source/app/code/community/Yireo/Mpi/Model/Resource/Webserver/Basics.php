@@ -23,7 +23,8 @@ class Yireo_Mpi_Model_Resource_Webserver_Basics extends Yireo_Mpi_Model_Resource
         $result = array();
 
         $result[] = $this->getMetric('sapi', $this->getSapi());
-        $result[] = $this->getMetric('apache_version', $this->getApacheVersion());
+        $result[] = $this->getMetric('webserver_type', $this->getWebserverType());
+        $result[] = $this->getMetric('webserver_version', $this->getWebserverVersion());
         $result[] = $this->getMetric('system_memory', $this->getSystemMemory(), 'bytes');
 
         return $result;
@@ -34,7 +35,14 @@ class Yireo_Mpi_Model_Resource_Webserver_Basics extends Yireo_Mpi_Model_Resource
         return php_sapi_name();
     }
 
-    protected function getApacheVersion()
+    protected function getWebserverType()
+    {
+        if (isset($_SERVER['SERVER_SOFTWARE'])) {
+            return $_SERVER['SERVER_SOFTWARE'];
+        }
+    }
+
+    protected function getWebserverVersion()
     {
         if (function_exists('apache_get_version')) {
             return apache_get_version();

@@ -13,6 +13,8 @@
  */
 class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resource_Abstract
 {
+    protected $dns_host = 'www.magentocommerce.com';
+
     /**
      * Return all data of this class
      *
@@ -27,6 +29,7 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
             $this->getMetricFromCallback('gzip', 'getGzip'),
             $this->getMetricFromCallback('deflate', 'getDeflate'),
             $this->getMetricFromCallback('dns_time', 'getDnsTime', 'seconds'),
+            $this->getMetricFromCallback('dns_host', 'getDnsHost'),
             $this->getMetricFromCallback('openssl_digest_methods', 'getOpensslDigestMethods', 'array'),
             $this->getMetricFromCallback('openssl_cipher_methods', 'getOpensslCipherMethods', 'array'),
             $this->getMetricFromCallback('openssl_version', 'getOpensslVersion'),
@@ -60,9 +63,14 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
         return (bool) stristr($_SERVER['HTTP_ACCEPT_ENCODING'], 'deflate');
     }
 
+    public function getDnsHost()
+    {
+        return $this->dns_host;
+    }
+
     public function getDnsTime()
     {
-        $host = 'www.magentocommerce.com';
+        $host = $this->dns_host;
         $dnsTimer = 0;
         for($i = 0; $i < 4; $i++) {
             $startTimer = microtime(true);

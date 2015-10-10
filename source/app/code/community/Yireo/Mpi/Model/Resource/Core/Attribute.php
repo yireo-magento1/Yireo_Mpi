@@ -43,10 +43,10 @@ class Yireo_Mpi_Model_Resource_Core_Attribute extends Yireo_Mpi_Model_Resource_A
         $attributes = $this->getAttributes();
         $this->attributeCountAll = $attributes->getSize();
 
-        $attributes->getSelectCountSql()->reset();
+        $attributes = $this->getAttributes();
         $this->attributeCountLayNav = $attributes->addFieldToFilter('is_filterable', 1)->getSize();
 
-        $attributes->getSelectCountSql()->reset();
+        $attributes = $this->getAttributes();
         $this->attributeCountSearch = $attributes->addFieldToFilter('is_searchable', 1)->getSize();
     }
 
@@ -55,7 +55,7 @@ class Yireo_Mpi_Model_Resource_Core_Attribute extends Yireo_Mpi_Model_Resource_A
      */
     protected function getAttributes()
     {
-        $attributes = Mage::getSingleton('eav/config')->getEntityType(Mage_Catalog_Model_Product::ENTITY)->getAttributeCollection();
+        $attributes = Mage::getModel('eav/config')->getEntityType(Mage_Catalog_Model_Product::ENTITY)->getAttributeCollection();
         return $attributes;
     }
 }

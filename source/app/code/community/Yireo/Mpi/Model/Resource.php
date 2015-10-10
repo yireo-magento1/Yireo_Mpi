@@ -23,6 +23,7 @@ class Yireo_Mpi_Model_Resource
             'test',
         ),
         'all' => array(
+            'attribute_listing',
             'core_attribute',
             'core_cache',
             'core_catalog',
@@ -127,6 +128,7 @@ class Yireo_Mpi_Model_Resource
             return array();
         }
 
+        //Mage::log('[Yireo_Mpi] '.$modelName);
         $modelMetrics = $model->getData();
 
         if (is_array($modelMetrics) == false) {
