@@ -23,6 +23,7 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
     public function getData()
     {
         return array(
+            $this->getMetricFromCallback('extension_version', 'getExtensionVersion'),
             $this->getMetricFromCallback('ip', 'getIpAddress'),
             $this->getMetricFromCallback('internal_ip', 'getInternalIpAddress'),
             $this->getMetricFromCallback('keep_alive', 'getKeepAlive'),
@@ -36,6 +37,12 @@ class Yireo_Mpi_Model_Resource_Environment_Basics extends Yireo_Mpi_Model_Resour
             $this->getMetric('timezone:php', date_default_timezone_get()),
             $this->getMetric('timezone:ini', ini_get('date.timezone')),
         );
+    }
+
+    public function getExtensionVersion()
+    {
+        $config = Mage::app()->getConfig()->getModuleConfig('Yireo_Mpi');
+        return (string)$config->version;
     }
 
     public function getIpAddress()

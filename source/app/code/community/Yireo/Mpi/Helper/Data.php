@@ -91,4 +91,13 @@ class Yireo_Mpi_Helper_Data extends Mage_Core_Helper_Abstract
      
         return $groups;
     }
+
+    public function getDefaultStore()
+    {
+        $defaultStore = Mage::app()
+            ->getWebsite(true)
+            ->getDefaultGroup()
+            ->getDefaultStore();
+        return $defaultStore;
+    }
 }

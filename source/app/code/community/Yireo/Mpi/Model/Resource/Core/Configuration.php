@@ -20,10 +20,11 @@ class Yireo_Mpi_Model_Resource_Core_Configuration extends Yireo_Mpi_Model_Resour
      */
     public function getData()
     {
+        $defaultStore = Mage::helper('mpi')->getDefaultStore();
         $result = array();
 
         foreach ($this->getPaths() as $path => $variableType) {
-            $result[] = $this->getMetric($path, Mage::getStoreConfig($path), $variableType);
+            $result[] = $this->getMetric($path, Mage::getStoreConfig($path, $defaultStore), $variableType);
         }
 
         foreach ($this->getNodes() as $node => $variableType) {

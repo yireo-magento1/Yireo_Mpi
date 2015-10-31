@@ -18,7 +18,6 @@
     </modules>
 
     <global>
-
         <blocks>
             <mpi>
                 <class>Yireo_Mpi_Block</class>
@@ -36,7 +35,6 @@
                 <class>Yireo_Mpi_Model</class>
             </mpi>
         </models>
-
     </global>
 
     <adminhtml>
