@@ -18,19 +18,13 @@ class Yireo_Mpi_Model_Resource_Security_Shoplift extends Yireo_Mpi_Model_Resourc
     public function getData()
     {
         return array(
-            $this->getMetricFromCallback('cms_wysiwyg_post', 'checkCmsWysiwygPost'),
             $this->getMetricFromCallback('patch_internally_forwarded', 'checkInternallyForwardedMethod'),
         );
     }
 
-    public function checkCmsWysiwygPost()
-    {
-        return false;
-    }
-
     public function checkInternallyForwardedMethod()
     {
-        $result = method_exists('Mage_Admin_Model_Observer','setInternallyForwarded');
+        $result = method_exists('Mage_Core_Controller_Request_Http', 'setInternallyForwarded');
         return $result;
     }
 }

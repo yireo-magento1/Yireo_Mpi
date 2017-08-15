@@ -53,9 +53,11 @@ The entry-file can be accessed as such:
 
     http://MAGENTO/yireo_mpi.php
 
-To get all data from the metric-group "basic", use the following:
+To get all data from the metric-group `basic`, use the following:
 
     http://MAGENTO/yireo_mpi.php?action=collect&group=basic&secret=SECRET
+
+You can use the group `all` for all resources.
 
 
 ## Format
